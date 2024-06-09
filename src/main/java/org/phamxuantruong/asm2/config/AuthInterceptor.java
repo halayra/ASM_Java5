@@ -17,12 +17,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Users user = session.get("user");
-        if (user == null || !user.getAdmin()) {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        Object loggedInUser = session.get("loggedInUser");
+        Object isAdmin = session.get("isAdmin");
+
+        if (loggedInUser == null) {
+            // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
             response.sendRedirect("/login");
             return false;
+        } else if (!(boolean) isAdmin) {
+            // Nếu không phải là admin, chuyển hướng hoặc trả về trang lỗi
+            response.sendRedirect("/access-denied");
+            return false;
         }
+
+        // Nếu là admin đã đăng nhập, cho phép truy cập các đường dẫn dành cho manager
         return true;
     }
 }
+
 

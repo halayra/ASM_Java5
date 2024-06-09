@@ -48,6 +48,7 @@ public class LoginController {
                 if (passwordEncoder.matches(password, user.getPassword())) {
                     // Đăng nhập thành công
                     session.setAttribute("loggedInUser", user.getUsername()); // Lưu tên người dùng vào session
+                    session.setAttribute("isAdmin", user.getAdmin()); // Lưu trạng thái admin vào session
                     return "redirect:/";
                 } else {
                     // Sai mật khẩu, hiển thị thông báo lỗi
