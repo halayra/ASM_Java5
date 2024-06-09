@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/login/css/style.css">
+    <title>Bootstrap 4 Login/Register Form</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div th:include="~{home/topbar2 :: topbar2}"></div>
+</div>
+<div class="container">
+    <form th:action="@{/signup/save}" th:object="${user}" class="form-signup" method="post">
+        <div class="social-login">
+            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span></button>
+        </div>
+        <div class="social-login">
+            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span></button>
+        </div>
+
+        <p style="text-align:center">OR</p>
+
+        <input type="text" id="user-name" class="form-control" placeholder="Tên đăng nhập" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+        <br><br>
+        <input type="text" id="fullname" class="form-control" placeholder="Họ và tên" th:field="*{fullname}">
+        <span th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" class="text-danger"></span>
+        <br><br>
+        <input type="email" id="user-email" class="form-control" placeholder="Email" th:field="*{email}">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+        <br><br>
+        <input type="text" id="phone" class="form-control" placeholder="Số điện thoại" th:field="*{phoneNumber}">
+        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="text-danger"></span>
+        <br><br>
+
+        <select id="gender" class="form-control" th:field="*{gender}">
+            <option value="" disabled selected>Chọn giới tính</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+            <option value="other">Khác</option>
+        </select>
+        <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="text-danger"></span>
+        <br><br>
+
+        <input type="password" id="user-pass" class="form-control" placeholder="Mật khẩu" th:field="*{password}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+        <br><br>
+        <input type="password" id="user-repeatpass" class="form-control" placeholder="Nhập lại mật khẩu" th:field="*{repeatPassword}">
+        <span th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="text-danger"></span>
+        <br><br>
+        <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Đăng kí</button>
+        <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Quay lại</a>
+    </form>
+</div>
+
+<div class="container-fluid momo">
+    <div th:include="~{home/footer :: footer}"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="/login/js/script.js"></script>
+<script src="/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
